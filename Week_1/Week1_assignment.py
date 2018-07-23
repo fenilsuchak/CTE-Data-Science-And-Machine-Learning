@@ -57,6 +57,62 @@ def findtype(inputnumber):
    what happened in the previous call? Oh yeah. This should do it.
    Someone sitting late night sipping coffee surely came up with this idea, which is generally called coroutines
    Python has it implemented for you called "yield" statement.
-   An yield statement( must be in a function) returns a generator. [Read more on Generators and Iterators]
-'''
+   An yield statement makes a function generators. [Read more on Generators and Iterators]
    
+   Below are some implementations which make you familiar with yield statement, iterators, generators.
+'''
+#First is range()
+k_range = range(0, 10, 2)
+print(type(k)) 
+for elems in k:
+    print(elems) #Now k is not a list, it generates the numbers only when queried.
+#Range is an iterable not an iterator.
+#But
+k_iterator = iter(k) 
+print(type(range(k)))
+#Iterator is just a class with some methods(Read Docs),an iterator has the most useful is the next() function.[Thats the only thing we use]
+next(k_range) #error
+next(k_iter)
+next(k_iter)
+next(k_iter) 
+#Iterators get exhausted. They are of one-time use. But Iterables are reusable to make iterators again.
+#Lists also are iterables. Calling iter([1,2,3]) makes it an iterator
+#A for loop implicitly converts [1,2,3] or range(0,10,2) to an interator by calling iter() on it.
+#So all Iterators are Lazy, they give out numbers only when called next() on them
+#But Iterables such as range(0,10,2) are lazy iterables. These dont store anything before hand. But Iterables such as lists are not
+#Lazy iterables they consume space in memory.
+
+
+#Now all generators are iterators but not vice-versa. Iterators have more flexibility than generators.
+#But mostly in ML we probably dont need that distinction. You can look up on the web if interested.
+
+generator1 = (x*x for x in range(10)) #This a generator expression.To do simple things.
+type(generator1)
+next(generator1)
+next(generator1)
+next(generator1)
+next(generator1)
+next(generator1) #Also get exhausted. And also are lazy.
+list1 = [x*x for x in range(10)]   #List comprehension style list
+#So lets get back to yield statement
+def yield_me_evens(): #To get more complex generators we can use generator functions.
+    for i in range(30):
+        if i%2 == 0:
+            yield i
+        else:
+            yield None
+generator2 = yield_me_evens()
+next(generator2)
+next(generator2)
+next(generator2)
+next(generator2)
+next(generator2)
+next(generator2)
+next(generator2)
+next(generator2)
+#Note that we are not calling a function anymore, yield statement converts the function into generator
+#Visualizing the flow.
+#We first make a generator object by calling the function yield_me_evens() and assigning it to generator2
+#When we call next on it. for loop is entered, until yield statement is hit, and corresponding is returned value is returned.
+#And we are out of the function. Next time we call next(), the process is continued from yield statement and stops when looped 
+#Again hits the yield statement.
