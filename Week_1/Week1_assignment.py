@@ -95,12 +95,14 @@ next(generator1)
 next(generator1) #Also get exhausted. And also are lazy.
 list1 = [x*x for x in range(10)]   #List comprehension style list
 #So lets get back to yield statement
-def yield_me_evens(): #To get more complex generators we can use generator functions.
+def yield_me_even_sums(): #To get more complex generators we can use generator functions.
+    sum = 0
     for i in range(30):
         if i%2 == 0:
-            yield i
+            sum = sum + i
+            yield sum
         else:
-            yield None
+            yield sum
 generator2 = yield_me_evens()
 next(generator2)
 next(generator2)
@@ -110,9 +112,22 @@ next(generator2)
 next(generator2)
 next(generator2)
 next(generator2)
-#Note that we are not calling a function anymore, yield statement converts the function into generator
-#Visualizing the flow.
-#We first make a generator object by calling the function yield_me_evens() and assigning it to generator2
-#When we call next on it. for loop is entered, until yield statement is hit, and corresponding is returned value is returned.
-#And we are out of the function. Next time we call next(), the process is continued from yield statement and stops when looped 
-#Again hits the yield statement.
+'''Note that we are not calling a function anymore, yield statement converts the function into generator
+   a.Visualizing the flow.
+     We first make a generator object by calling the function yield_me_evens() and assigning it to generator2
+     When we call next on it. for loop is entered, until yield statement is hit, and corresponding is returned value is returned.
+     And we are out of the function. Next time we call next(), the process is continued from yield statement and stops when loop 
+     Again hits the yield statement and the value next to yield is put out. And On and on.'''
+
+'''So here is your task. Write a function that returns sum of primes in imaginary list [2,3,4,5,6,7...,infinite], only as an when a customer logs in.
+   Calling next() on customer_prime_sum for the first time must return 2
+   Calling next() on customer_prime_sum for the second time must return 5
+   Calling next() on customer_prime_sum for the third time must return 5
+   Calling next() on customer_prime_sum for the infinite(th) time must return sum of all primes until inifinte+1.'''
+def customer_login_func(*args, **kwargs):
+    '''Your code here , Hint: you can call a function inside a function, 
+        ie you can use previous prime checking function'''
+
+    
+customer_prime_sum = customer_login_func() #Add arguments if any.
+    
