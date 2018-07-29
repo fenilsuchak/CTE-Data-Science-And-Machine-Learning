@@ -131,3 +131,136 @@ def customer_login_func(*args, **kwargs):
     
 customer_prime_sum = customer_login_func() #Add arguments if any.
     
+
+
+
+#Part 3-Basic Matrix manipulations
+"""
+NumPy is one of the best ways to manipulate and do matrix operations in python.
+Now in this part you'll be given an array of 10 3x3 arrays and then when given a new 3x3 array
+you'd need to the find one of those 10 previous which is closest to this new array.
+Images can be represented as arrays with each pixel having an element value in array.
+For example in grayscale images let 0 be black pixel, 1 be a white pixel and any value between will be gray.
+(0.3 would be darker than 0.6 likewise)
+"""
+import numpy as np#importing NumPy module with name as np
+
+#Initialising an array :
+
+blackarray=np.array([[0,0,0],
+	                 [0,0,0],
+	                 [0,0,0]])
+#this would reperesent an all black image.
+print(blackarray)
+#we are only representing images as arrays for undeerstanding purposes only,
+# numpy doesn't show these arrays as images. There are other image libraries for that purpose.
+
+whitedotarray=np.array([[0,0,0],
+	                    [0,1,0],
+	                    [0,0,0]])
+#Now this would be an image with a single white dot in centre of other 8 black pixels around it.
+
+whitedotarray=np.array([[0,0,0],
+	                    [0,0.9,0],
+	                    [0,0,0]])
+#This would similarly be a slightly faint white dot than before.
+
+
+whitelinearray=np.array([[0,0,0],
+	                     [1,1,1],
+	                     [0,0,0]])
+#Similarly this would represent a single white horizontal line on black background.
+
+imgs_array=np.array([[0,0,0],
+	                 [0,0,0],
+	                 [0,0,0]],
+
+	                [[1,1,1],
+	                 [1,1,1],
+	                 [1,1,1]],
+
+	                [[0,0,0],
+	                 [0,1,0],
+	                 [0,0,0]],
+
+	                [[1,1,1],
+	                 [1,0,1],
+	                 [1,1,1]],
+
+	                [[0,1,0],
+	                 [0,1,0],
+	                 [0,1,0]],
+
+	                [[0,0,0],
+	                 [1,1,1],
+	                 [0,0,0]],
+
+	                [[1,0,0],
+	                 [0,1,0],
+	                 [0,0,1]],
+
+	                [[1,1,1],
+	                 [0,0,0],
+	                 [1,1,1]],
+
+	                [[1,0,1],
+	                 [1,0,1],
+	                 [1,0,1]],
+
+	                [[0,0,1],
+	                 [0,1,0],
+	                 [1,0,0]])
+
+#This is the data you've been provided with. These are 10 different arrays, make sure they are iterable in a
+#for loop, coz you would need to compare every new array with each one of these 10 arrays.
+
+query_arrays=np.array([[0.03,0.06,0.1],
+	                    [0.1,0.98,0.2],
+	                    [0.04,0.1,0.02]],
+
+	                   [[0.96,0.03,0.2],
+	                    [0.06,0.91,0.02],
+	                    [0.03,0.3,0.8]],
+
+	                   [[0.67,0.15,0.93],
+	                    [0.76,0.12,0.89],
+	                    [0.68,0.03,0.83]],
+
+	                   [[0.92,0.1,0.92],
+	                    [0.12,0.95,0.12],
+	                    [0.99,0.06,0.99]])
+#These are your query arrays which you need to compare with your data to classify them as either of the 10 given to you.
+"""
+for example let's have a look at the first query array
+[[0.03,0.06,0.1],                                       [[0,0,0],
+ [0.1,0.98,0.2],       --> looks very similar to -->     [0,1,0],
+ [0.04,0.1,0.02]]                                        [0,0,0]]
+
+ But how would you compare 2 arrays, to find if they are similar?
+ You could find an error or difference between those arrays and then the one with the least error is the most similar.
+ So lets subtract the arrays to find difference_array :
+
+[[0.03,0.06,0.1],                          
+ [0.1,-0.02,0.2],       
+ [0.04,0.1,0.02]]
+
+ But while comparing, + or - shouldn't affect, so to find error you can add all the Absolute values of elements.
+ Absolute error = 0.03+0.06+0.1+0.1+0.02+0.2+0.04+0.1+0.02
+ Now you can find error with each pair in a for loop,
+ and classify as the one with least error. 
+ Another way instead of taking absolute of elements of the difference array, you could just square them and add them, to find squared error.
+"""
+query_errors=[0,0,0,0,0,0,0,0,0,0]
+for i in 4:
+	for j in 10:
+		#find error between query_arrays[i] and imgs_array[j]
+		#query_errors[j]= error
+    #argmin will give you the the argument of the least one of 10 errors for a particular query_array 'i'
+    #search more about argmax and argmin	
+    #print argmin value, ie. which one of the 10 img arrays is most similar to i'th query array.
+
+"""
+Machine learning is about learning the underlying structure in data, recognising patterns in your data.
+This algorithm is an called k-nearest neighbours algorithm, as you are finding nearest neighbours or similar arrays by just comparing them
+"""
+#COMPLETE the above assignment
