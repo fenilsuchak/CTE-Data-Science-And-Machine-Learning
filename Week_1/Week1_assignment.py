@@ -260,56 +260,7 @@ for i in 4:
     #print argmin value, ie. which one of the 10 img arrays is most similar to i'th query array.
 
 """
-What is Machine learning. It's about learning the underlying structure in data, recognising patterns in your data.
-Here instead of learning few abstracted feature from those 10 arrays we are simple remembering all those 10 arrays.
+Machine learning is about learning the underlying structure in data, recognising patterns in your data.
 This algorithm is an called k-nearest neighbours algorithm, as you are finding nearest neighbours or similar arrays by just comparing them
 """
 #COMPLETE the above assignment
-
-#More stuff about arrays
-#optional
-"""
-NOTE: When you initialise 2 arrays and add(+),subtract(-), multiply(*), divide(/),
-Operations would be ELEMENT-wise, array1*array2 won't give you matrix multiplication unlike in MATLAB.
-Experiment with different datatypes and arraysizes while carrying out these operation show which one leads to errors.
-TRY IT OUT below with x,y,v, or any other array you want.
-"""
-
-x = np.array([[1,2,3], [4,5,6], [7,8,9], [10, 11, 12]])
-v = np.array([1, 0, 1])
-y = np.empty_like(x)   # Create an empty matrix with the same shape as x
-
-y = x + v  
-print(y)
-#What do you notice? How can we add 2 arrays of different sizes? What is happening?
-"""
-You just added v to each row of x using broadcasting.
-The line y = x + v works even though x has shape (4, 3) and v has shape (3,) due to broadcasting;
-this line works as if v actually had shape (4, 3), where each row was a copy of v,
-and the sum was performed elementwise.
-
-While working with array6, have you checked out np.tile? If not check it out.
-"""
-vv = np.tile(v, (4, 1))   # Stack 4 copies of v on top of each other
-print(vv)                 # Prints "[[1 0 1]
-                          #          [1 0 1]
-                          #          [1 0 1]
-                          #          [1 0 1]]"
-y = x + vv  # Add x and vv elementwise
-print(y)  # Prints "[[ 2  2  4
-          #          [ 5  5  7]
-          #          [ 8  8 10]
-          #          [11 11 13]]"
-
-#This does the same job as above or else you could use a loop as well, like shown below
-for i in range(4):
-    y[i, :] = x[i, :] + v
-
-# Now y is the following
-# [[ 2  2  4]
-#  [ 5  5  7]
-#  [ 8  8 10]
-#  [11 11 13]]
-print(y)
-
-#GOOD JOB!! CHECKOUT NUMPY DOCUMENTATION FOR MORE!!
